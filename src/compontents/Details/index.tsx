@@ -1,17 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-type Props = {}
-
-type State = {}
-
-export class Details extends Component<Props, State> {
-  state = {}
-
-  render() {
-    return (
-      <div>Details</div>
-    )
-  }
+export default function Details() {
+  return (
+    <div>index</div>
+  )
 }
-
-export default Details

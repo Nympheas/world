@@ -1,17 +1,12 @@
-import React, { Component } from 'react'
+import React from 'react';
+import Search from '../Search';
+import Layout from '../Layout';
 
-type Props = {}
-
-type State = {}
-
-export class Home extends Component<Props, State> {
-  state = {}
-
-  render() {
-    return (
-      <div>index</div>
-    )
-  }
+export default function Home() {
+  return (
+    <Layout>
+      <Search />
+    </Layout>
+  )
 }
 
-export default Home
