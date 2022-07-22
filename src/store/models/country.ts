@@ -10,19 +10,9 @@ export interface Country {
   currencies: string
   languages: Language
   flag: string
-  borderCountries: BorderCountry
+  borderCountries: string[]
 }
 
 export interface Language {
-  id: string
-  iso639_1: string
-  iso639_2: string
-  name: string
-  nativeName: string
-}
-
-export interface BorderCountry {
-  id: string
-  code: string
   name: string
 }

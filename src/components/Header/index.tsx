@@ -5,6 +5,8 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import BedtimeIcon from '@mui/icons-material/Bedtime';
+import { useDispatch, useSelector } from "react-redux";
+import { changeMode } from '../../store/actions/mode.actions';
 
 export default function Header() {
 
@@ -18,11 +20,15 @@ export default function Header() {
 
     const [mode, setMode] = React.useState('dark');
 
-    const changeMode = () => {
+    const dispatch = useDispatch()
+
+    const changeModeStyle = () => {
         if (mode == 'dark') {
             setMode('white');
+            dispatch(changeMode(mode));
         } else {
             setMode('dark');
+            dispatch(changeMode(mode));
         }
     }
   return (
@@ -35,7 +41,7 @@ export default function Header() {
         </Grid>
         <Grid item sm={6} md={6}>
             <Item>
-                <Button onClick={changeMode()}><BedtimeIcon color={'primary'}/>Dark Mode</Button>
+                <Button onClick={changeModeStyle}><BedtimeIcon color={'primary'}/>Dark Mode</Button>
             </Item>
         </Grid>
       </Grid>

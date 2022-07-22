@@ -13,16 +13,6 @@ import {
   } from "../actions/country.actions"
   
   export interface CountryState {
-    createdAt: {
-      loaded: boolean
-      success: boolean
-      countrys: Country[]
-    }
-    sold: {
-      loaded: boolean
-      success: boolean
-      products: Country[]
-    }
     search: Country[]
     filter: {
       loaded: boolean
@@ -40,16 +30,6 @@ import {
   }
   
   const initialState: CountryState = {
-    createdAt: {
-      loaded: false,
-      success: false,
-      countrys: []
-    },
-    sold: {
-      loaded: false,
-      success: false,
-      products: []
-    },
     search: [],
     filter: {
       success: false,
@@ -65,13 +45,18 @@ import {
       result: {
         _id: "",
         name: "",
-        price: 0,
-        description: "",
-        quantity: 0,
-        sold: 0,
-        photo: new FormData(),
-        shipping: false,
-        createdAt: ""
+        nativeName: "",
+        population: "",
+        regin: "",
+        subRegin: "",
+        capital: "",
+        topLevelDomain: "",
+        currencies: "",
+        languages: {
+          name: ""
+        },
+        flag: "",
+        borderCountries: []
       }
     }
   }
@@ -83,26 +68,21 @@ import {
     switch (action.type) {
       case GET_COUNTRY:
         return {
-          ...state,
-          [action.sortBy]: {
-            ...state[action.sortBy === "createdAt" ? "createdAt" : "sold"],
-            loaded: false,
-            success: false
-          }
+          ...state
         }
       case GET_COUNTRY_SUCCESS:
         return {
           ...state,
-          [action.sortBy]: {
+          payload: {
             loaded: true,
             success: true,
-            products: action.payload
+            countries: action.payload
           }
         }
       case SEARCH_COUNTRY_SUCCESS:
         return {
           ...state,
-          search: action.products
+          search: action.countries
         }
       case FILTER_COUNTRY:
         return {
@@ -117,10 +97,7 @@ import {
           }
         }
       case FILTER_COUNTRY_SUCCESS:
-        let data =
-          action.skip === 0
-            ? action.payload.data
-            : [...state.filter.result.data, ...action.payload.data]
+        let data = [...state.filter.result.data, ...action.payload.data]
   
         return {
           ...state,

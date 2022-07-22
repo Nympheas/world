@@ -6,35 +6,22 @@ export const GET_COUNTRY_SUCCESS = "GET_COUNTRY_SUCCESS"
 
 export interface GetCountryAction {
   type: typeof GET_COUNTRY
-  sortBy: string
-  order: string
-  limit: number
 }
 
 export interface GetCountrySuccessAction {
   type: typeof GET_COUNTRY_SUCCESS
   payload: Country[]
-  sortBy: string
 }
 
-export const getCountry = (
-  sortBy: string,
-  order: string = "desc",
-  limit: number = 10
-): GetCountryAction => ({
-  type: GET_COUNTRY,
-  sortBy,
-  order,
-  limit
+export const getCountry = (): GetCountryAction => ({
+  type: GET_COUNTRY
 })
 
 export const getCountrySuccess = (
-  payload: Country[],
-  sortBy: string
+  payload: Country[]
 ): GetCountrySuccessAction => ({
   type: GET_COUNTRY_SUCCESS,
-  payload,
-  sortBy
+  payload
 })
 
 /**
@@ -47,29 +34,27 @@ export const SEARCH_COUNTRY_SUCCESS = "SEARCH_COUNTRY_SUCCESS"
 export interface SearchCountryAction {
   type: typeof SEARCH_COUNTRY
   payload: {
-    category: string
-    search: string
+    name: string
   }
 }
 
 export interface SearchCountrySuccessAction {
   type: typeof SEARCH_COUNTRY_SUCCESS
-  products: Country[]
+  countries: Country[]
 }
 
-export const searchProduct = (payload: {
-  category: string
-  search: string
+export const searchCountry = (payload: {
+  name: string
 }): SearchCountryAction => ({
   type: SEARCH_COUNTRY,
   payload
 })
 
 export const SearchCountrySuccess = (
-  products: Country[]
+  countries: Country[]
 ): SearchCountrySuccessAction => ({
   type: SEARCH_COUNTRY_SUCCESS,
-  products
+  countries
 })
 
 /**
@@ -80,14 +65,7 @@ export const FILTER_COUNTRY = "FILTER_COUNTRY"
 export const FILTER_COUNTRY_SUCCESS = "FILTER_COUNTRY_SUCCESS"
 
 export interface FilterPayload {
-  order?: string
-  sortBy?: string
-  limit?: number
-  skip: number
-  filters?: {
-    category: string[]
-    price: number[]
-  }
+  name: string
 }
 
 export interface FilterCountryAction {
@@ -101,7 +79,6 @@ export interface FilterCountrySuccessAction {
     size: number
     data: Country[]
   }
-  skip: number
 }
 
 export const filterCountry = (
@@ -114,12 +91,10 @@ export const filterCountrySuccess = (
   payload: {
     size: number
     data: Country[]
-  },
-  skip: number
+  }
 ): FilterCountrySuccessAction => ({
   type: FILTER_COUNTRY_SUCCESS,
-  payload,
-  skip
+  payload
 })
 
 export type CountryUnionType =
